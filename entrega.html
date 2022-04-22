@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IceFlix: diseño de microservicios - Entrega extraordinaria &#8212; Sistemas Distribuidos - Lab</title>
+    <title>La entrega &#8212; Sistemas Distribuidos - Lab</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="El microservicio como base." href="microservicio.html" />
+    <link rel="prev" title="Cliente IceFlix" href="cliente.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -91,13 +91,13 @@ const thebe_selector_output = ".output, .cell_output"
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_extraordinaria.html">
    IceFlix: diseño de microservicios - Entrega extraordinaria
   </a>
  </li>
 </ul>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="microservicio.html">
    El microservicio como base.
@@ -113,8 +113,8 @@ const thebe_selector_output = ".output, .cell_output"
    Cliente IceFlix
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="entrega.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    La entrega
   </a>
  </li>
@@ -159,7 +159,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro_extraordinaria.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/entrega.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -179,7 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/joselsegura/ssdd-lab/issues/new?title=Issue%20on%20page%20%2Fintro_extraordinaria.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/joselsegura/ssdd-lab/issues/new?title=Issue%20on%20page%20%2Fentrega.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -206,8 +206,13 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduccion">
-   Introducción
+  <a class="reference internal nav-link" href="#documentacion-de-entrega">
+   Documentación de entrega
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defensa-de-practicas">
+   Defensa de prácticas
   </a>
  </li>
 </ul>
@@ -220,7 +225,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>IceFlix: diseño de microservicios - Entrega extraordinaria</h1>
+                <h1>La entrega</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -231,8 +236,13 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduccion">
-   Introducción
+  <a class="reference internal nav-link" href="#documentacion-de-entrega">
+   Documentación de entrega
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defensa-de-practicas">
+   Defensa de prácticas
   </a>
  </li>
 </ul>
@@ -244,47 +254,83 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="iceflix-diseno-de-microservicios-entrega-extraordinaria">
-<span id="extra21-22"></span><h1><strong>IceFlix</strong>: diseño de microservicios - Entrega extraordinaria<a class="headerlink" href="#iceflix-diseno-de-microservicios-entrega-extraordinaria" title="Permalink to this headline">¶</a></h1>
-<p>El objetivo principal del proyecto es <strong>desarrollar un sistema distribuido
-basado en microservicios</strong>. Para ello se tomará como modelo la popular
-plataforma de streaming NetFlix para crear una pequeña plataforma de
-streaming bajo demanda, utilizando algunos de los servicios disponibles en
-ZeroC ICE. Los objetivos principales de la práctica son:</p>
-<ul class="simple">
-<li><p>Familiarizarse con la invocación a métodos remotos.</p></li>
-<li><p>Control de eventos.</p></li>
-<li><p>Diseñar algoritmos tolerantes a fallos comunes en sistemas distribuidos.</p></li>
-<li><p>Fomentar el trabajo en equipos multidisciplinares.</p></li>
-</ul>
-<div class="section" id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
-<p>Conocida por todos es la plataforma de <em>streaming</em> bajo demanda
-<strong>Netflix</strong>, lo que quizás no es tan popular es la gran competencia técnica
-que existe detrás, el increíble sistema distribuido que soporta el uso
-simultáneo de la plataforma por millones de usuarios en todo el mundo. No
-todos los detalles de su funcionamiento han sido publicados por la empresa,
-sin embargo, si los suficientes para poder hacernos una idea general de su
-funcionamiento.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Imagen</span> <span class="n">Netflix</span> <span class="n">arquitectura</span>
+  <div class="tex2jax_ignore mathjax_ignore section" id="la-entrega">
+<h1>La entrega<a class="headerlink" href="#la-entrega" title="Permalink to this headline">¶</a></h1>
+<p>Se entregará un único fichero comprimido en zip o tar.gz a través de la
+plataforma de <strong>Campus Virtual</strong>. La estructura interna del archivo queda
+a decisión de los estudiantes, pero deberá seguir al menos las siguientes
+reglas:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_iceflix</span></code>: debe estar en la raíz del directorio del proyecto y debe
+ejecutar una instancia de todos y cada uno de los microservicios que
+forman el sistema. El fichero debe ser ejecutable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_client</span></code>: debe estar en la raíz del directorio del proyecto y debe
+lanzar el programa cliente. El fichero debe ser ejecutable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CODEOWNERS</span></code>: debe estar en la raíz del directorio del proyecto y debe
+incluir la lista de miembros del equipo, uno por línea, comenzando por
+el carácter <code class="docutils literal notranslate"><span class="pre">#</span></code>. También debe incluir en la última línea un <code class="docutils literal notranslate"><span class="pre">*</span></code> seguido
+de los nombres de usuario en GitHub de los componentes del equipo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code>: debe estar en la raíz del directorio del proyecto. Será un
+pequeño documento en lenguaje <a class="reference external" href="https://www.markdownguide.org/cheat-sheet/">Markdown</a> que explicará paso a paso
+cómo reproducir un medio y cómo editar su nombre y tags. Ejemplo de
+formato del fichero podría ser:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Ejecutar “run_iceflix” 
+Ejecutar “run_client” 
+Seleccionar &lt;conectar&gt; e introducir el proxy del servicio IceFlix::Main() 
+Seleccionar &lt;autenticar&gt; e introducir usuario y contraseña 
+Seleccionar &lt;buscar&gt; e introducir “ejemplo” 
+Seleccionar primer resultado de búsqueda pulsando “1” 
+Seleccionar &lt;reproducir&gt; 
 </pre></div>
 </div>
-<p>Una colección de microservicios soporta el funcionamiento de la
-plataforma: autenticación, facturación, catalogado, recodificación,
-análisis y profiling de clientes (big data), etc. Estos microservicios se
-ejecutan en varias regiones de AWS. Por otro lado, Netflix dispone de sus
-propios servidores físicos (OCA’s) que almacenan los archivos de vídeo y
-están diseñados específicamente para ofrecer un gran rendimiento en tareas
-de <em>streaming</em>.</p>
-<p>Obviamente no se pretende crear una arquitectura de una complejidad
-semejante, pero sí intentaremos implementar una pequeña maqueta con una
-serie de microservicios que cooperarán entre sí para ofrecer video bajo
-demanda de una forma similar a como lo hace la conocida plataforma. No
-vamos a utilizar mecanismos de caché ni a implementar muchos de los
-servicios disponibles en la plataforma real: nos centraremos en
-autenticación, catalogado de medios y streaming RTSP.</p>
+<p>También debe incluir, bajo el título, la URL al repositorio del
+proyecto, así como cualquier otra información relevante del proyecto
+que el equipo considere oportuno.</p>
+</li>
+</ul>
+<p>Para poder probar la práctica de manera directa, se puede incluir un
+archivo de vídeo de no más de 5MB a modo de ejemplo. De ser así, dicho
+vídeo <strong>deberá estar en el directorio <code class="docutils literal notranslate"><span class="pre">resources</span></code></strong>.</p>
+<p>Es muy importante seguir las indicaciones sobre la entrega de manera exacta
+ya que parte del proceso de evaluación se realiza de forma automática, por
+eso los nombres de fichero deben ser exactamente los indicados
+anteriormente.</p>
+<p>Para facilitar la creación de esta estructura, se proporciona un
+repositorio plantilla <a class="reference external" href="https://github.com/SSDD-2021-2022/template-ssdd-lab">template-ssdd-lab</a> que incluye todos los ficheros
+anteriores, además de algunos ficheros de configuración, ejemplos de
+implementación y utilidades para crear un programa instalable Python.</p>
+<p>Adicionalmente a la evaluación automática también, realizará un análisis
+estático de código con <code class="docutils literal notranslate"><span class="pre">pylint</span></code><a class="reference external" href="https://pylint.pycqa.org/en/latest/">3</a>. Se considera que el estilo es correcto
+si obtiene como mínimo un <strong>9.0</strong> de puntuación global.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ATENCIÓN: Si tenéis miembros en el equipo que utilicen Windows, tened en
+cuenta que los retornos de línea deben ser TIPO UNIX. Si se utilizan los
+retornos tipo DOS la práctica no funcionará en el entorno de pruebas.</p>
 </div>
-<div class="toctree-wrapper compound">
+<div class="section" id="documentacion-de-entrega">
+<h2>Documentación de entrega<a class="headerlink" href="#documentacion-de-entrega" title="Permalink to this headline">¶</a></h2>
+<p>No se solicitará memoria de prácticas ni documentación adicional en la
+entrega. La evolución del proyecto se consultará con el historial de
+commits de GIT. Por tanto, no se recomienda subir la práctica en uno o dos
+commits. El repositorio debe tener commits de todos los miembros del
+equipo.</p>
+</div>
+<div class="section" id="defensa-de-practicas">
+<h2>Defensa de prácticas<a class="headerlink" href="#defensa-de-practicas" title="Permalink to this headline">¶</a></h2>
+<p>La defensa de la práctica es <strong>obligatoria</strong>. Si algún grupo o alguno de
+sus miembros, no se presentara, la práctica se considerará
+<strong>no presentada</strong>.</p>
+<p>Cada grupo que presente la práctica será convocado por uno de los
+profesores de prácticas a una hora específica para revisar la práctica con
+ellos y ejecutarla.</p>
+<p>Se hará especial hincapié en ello en los siguientes casos:</p>
+<ul class="simple">
+<li><p>Repositorio con muy pocos commits o sin commits de algún miembro.</p></li>
+<li><p>El buscador de plagios alerte sobre dos o más entregas.</p></li>
+</ul>
+<p>Una vez publicadas las notas, los alumnos tendrán derecho a revisión si no
+estuvieran de acuerdo.</p>
 </div>
 </div>
 
@@ -312,13 +358,13 @@ autenticación, catalogado de medios y streaming RTSP.</p>
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="microservicio.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">El microservicio como base.</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="cliente.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Cliente IceFlix</p>
+        </div>
     </a>
 </div>
             

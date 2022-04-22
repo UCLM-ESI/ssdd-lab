@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="La entrega" href="entrega.html" />
     <link rel="prev" title="Uso de canales de eventos" href="canales_eventos.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -111,6 +112,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Cliente IceFlix
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="entrega.html">
+   La entrega
   </a>
  </li>
 </ul>
@@ -195,6 +201,39 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conexion-y-autenticacion">
+   Conexión y autenticación
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#busqueda-en-el-catalogo">
+   Búsqueda en el catálogo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edicion-del-catalogo">
+   Edición del catálogo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reproduccion-de-medios">
+   Reproducción de medios
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operaciones-administrativas">
+   Operaciones administrativas
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -207,6 +246,39 @@ const thebe_selector_output = ".output, .cell_output"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conexion-y-autenticacion">
+   Conexión y autenticación
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#busqueda-en-el-catalogo">
+   Búsqueda en el catálogo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edicion-del-catalogo">
+   Edición del catálogo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reproduccion-de-medios">
+   Reproducción de medios
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operaciones-administrativas">
+   Operaciones administrativas
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -215,6 +287,88 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="cliente-iceflix">
 <h1>Cliente IceFlix<a class="headerlink" href="#cliente-iceflix" title="Permalink to this headline">¶</a></h1>
+<p>A continuación, se especificarán las características que debe implementar
+el cliente.</p>
+<div class="section" id="conexion-y-autenticacion">
+<h2>Conexión y autenticación<a class="headerlink" href="#conexion-y-autenticacion" title="Permalink to this headline">¶</a></h2>
+<p>El cliente debe permitir especificar el proxy del servicio <code class="docutils literal notranslate"><span class="pre">Main</span></code> que va a
+utilizar. En caso de capturar un error <code class="docutils literal notranslate"><span class="pre">TemporaryUnavailable</span></code>, podría
+informar al usuario. Pero debe reintentar automáticamente la conexión hasta
+un máximo determinado de veces que podrá definir el usuario y que por
+defecto serán 3 intentos, con una pausa de 5.0 segundos entre intentos.</p>
+<p>Cuando la conexión esté establecida (se haya comprobado que el proxy es
+válido) se debe permitir al usuario autenticarse en el sistema. Esta
+autenticación no debe ser obligatoria puesto que se permite realizar
+búsquedas en el catálogo de forma anónima (únicamente por nombre).</p>
+<p>En ningún caso el cliente debe mandar la contraseña introducida por el
+usuario (que tampoco se debe mostrar nunca en el cliente) sino que mandará
+la representación hexadecimal de la suma SHA256 del password.</p>
+<p>Una vez que el cliente se haya autenticado, se debe suscribir al canal que
+implementa <code class="docutils literal notranslate"><span class="pre">Revocations</span></code> para detectar que su token ha caducado y, si lo
+hace, renovar automáticamente el mismo.</p>
+<p>También debe permitir cerrar la sesión del usuario para poder cambiar las
+credenciales si el usuario lo desea.</p>
+<p>Por último, el cliente mantendrá informado al usuario en todo momento de
+que la conexión está establecida y de si existe una sesión iniciada.</p>
+</div>
+<div class="section" id="busqueda-en-el-catalogo">
+<h2>Búsqueda en el catálogo<a class="headerlink" href="#busqueda-en-el-catalogo" title="Permalink to this headline">¶</a></h2>
+<p>Cuando el cliente se encuentre on-line, permitirá al usuario buscar títulos
+por nombre o por tags. Las búsquedas por nombre se pueden realizar por
+término exacto o simplemente que el título incluya la palabra de búsqueda.
+La búsqueda por tags funcionará de manera similar: cuando el usuario
+introduzca la lista de tags, podrá indicar si quiere los títulos cuyos tags
+tengan alguno en común o tengan que estar todos.</p>
+<p>Una vez realizada la búsqueda, si se obtienen identificadores de vuelta, el
+cliente mostrará el nombre y los tags del stream referenciado por cada
+identificador.</p>
+<p>El último resultado de búsqueda que haya obtenido títulos se almacenará en
+memoria de manera que el usuario pueda seleccionar alguno de los títulos
+obtenidos en cualquier momento. Cuando el usuario seleccione un título, el
+programa cliente deberá informar al usuario en todo momento de su selección
+activa.</p>
+</div>
+<div class="section" id="edicion-del-catalogo">
+<h2>Edición del catálogo<a class="headerlink" href="#edicion-del-catalogo" title="Permalink to this headline">¶</a></h2>
+<p>Las opciones de edición del catálogo sólo podrán utilizarse si el cliente
+tiene una sesión activa en ese momento, en caso contrario se informará al
+usuario que debe autenticarse. Además de tener un token válido, el usuario
+deberá haber seleccionado alguno de los títulos que haya encontrado en una
+búsqueda anterior; si no tiene seleccionado ningún título, el error deberá
+informar al usuario de que necesita uno.</p>
+<p>Una vez se disponga de autorización y del título que se desea editar, el
+cliente debe permitir añadir tags (uno o varios) o eliminarlos.</p>
+</div>
+<div class="section" id="reproduccion-de-medios">
+<h2>Reproducción de medios<a class="headerlink" href="#reproduccion-de-medios" title="Permalink to this headline">¶</a></h2>
+<p>Si el cliente dispone de conexión, autorización y título seleccionado, debe
+permitir al usuario iniciar la reproducción del flujo. Una vez iniciado una
+reproducción, el cliente seguirá funcionando con normalidad, además debe
+permitir interrumpir el flujo en cualquier momento. Cuando se esté
+reproduciendo un vídeo, el cliente debe informar al usuario de este hecho
+de forma continua, además, debe suscribirse al canal asociado al
+<code class="docutils literal notranslate"><span class="pre">StreamController</span></code> que implementa <code class="docutils literal notranslate"><span class="pre">StreamSync</span></code> para recibir los eventos
+<code class="docutils literal notranslate"><span class="pre">requestAuthentication()</span></code> necesarios para continuar con la recepción del
+video en caso de expiración del token.</p>
+</div>
+<div class="section" id="operaciones-administrativas">
+<h2>Operaciones administrativas<a class="headerlink" href="#operaciones-administrativas" title="Permalink to this headline">¶</a></h2>
+<p>Las diferentes operaciones administrativas que están definidas para los
+servicios deben poder ser utilizadas, bien en el mismo cliente a través de
+un menú específico, bien en un cliente específico aparte. En ambos casos,
+el token administrativo se tratará como una contraseña, no debiéndose
+mostrar en pantalla. Puede ser suministrado como parámetro de
+configuración.</p>
+<p>Para la operación <code class="docutils literal notranslate"><span class="pre">StreamProvider.uploadMedia()</span></code> será necesario implementar
+un sirviente de la interfaz <code class="docutils literal notranslate"><span class="pre">MediaUploader</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">receive()</span></code>: el servicio de stream provider llamará a esta operación para
+recibir un bloque de bytes, de como máximo, el tamaño indicado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code>:  el servicio de stream provider llamará a esta operación para
+cancelar la subida o cuando el número de bytes recibido en el último
+<code class="docutils literal notranslate"><span class="pre">receive</span></code> sea 0, para indicar que ya se ha terminado la transferencia.</p></li>
+</ul>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -248,6 +402,13 @@ const thebe_selector_output = ".output, .cell_output"
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Uso de canales de eventos</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="entrega.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">La entrega</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
