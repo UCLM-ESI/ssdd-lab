@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El microservicio como base. &#8212; Sistemas Distribuidos - Lab</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Uso de canales de eventos" href="canales_eventos.html" />
+    <link rel="prev" title="IceFlix: diseño de microservicios - Entrega extraordinaria" href="intro_extraordinaria.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Sistemas Distribuidos - Lab</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro_extraordinaria.html">
+   IceFlix: diseño de microservicios - Entrega extraordinaria
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   El microservicio como base.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="canales_eventos.html">
+   Uso de canales de eventos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cliente.html">
+   Cliente IceFlix
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/microservicio.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/joselsegura/ssdd-lab"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/joselsegura/ssdd-lab/issues/new?title=Issue%20on%20page%20%2Fmicroservicio.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-principal">
+   Servicio principal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-autenticacion">
+   Servicio de autenticación.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-instancia-del-servicio-de-autenticacion">
+     Comunicación entre instancia del servicio de autenticación
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-catalogo">
+   Servicio de catálogo
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-instancia-del-servicio-de-catalogo">
+     Comunicación entre instancia del servicio de catálogo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-streaming">
+   Servicio de
+   <em>
+    streaming
+   </em>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-el-servicio-de-streaming-y-el-cliente">
+     Comunicación entre el servicio de
+     <em>
+      streaming
+     </em>
+     y el cliente.
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>El microservicio como base.</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-principal">
+   Servicio principal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-autenticacion">
+   Servicio de autenticación.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-instancia-del-servicio-de-autenticacion">
+     Comunicación entre instancia del servicio de autenticación
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-catalogo">
+   Servicio de catálogo
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-instancia-del-servicio-de-catalogo">
+     Comunicación entre instancia del servicio de catálogo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#servicio-de-streaming">
+   Servicio de
+   <em>
+    streaming
+   </em>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comunicacion-entre-el-servicio-de-streaming-y-el-cliente">
+     Comunicación entre el servicio de
+     <em>
+      streaming
+     </em>
+     y el cliente.
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="el-microservicio-como-base">
+<h1>El microservicio como base.<a class="headerlink" href="#el-microservicio-como-base" title="Permalink to this headline">¶</a></h1>
+<p>El sistema estará dividido en diferentes microservicios, cada uno encargado
+de realizar una de las diferentes tareas que tiene que realizar el sistema
+en su conjunto. Además, cada microservicio deberá lanzarse varias veces,
+de modo que tengamos varias instancias de cada uno para aumentar la
+disponibilidad de los mismos.</p>
+<p>Esta multiplicidad de instancias de cada servicio implica que las
+instancias de todos los servicios deberán conocerse entre ellas y, en
+algunos casos, compartir los datos que están utilizando de manera que no
+haya incoherencias entre los datos almacenados en cada instancia.</p>
+<div class="section" id="servicio-principal">
+<h2>Servicio principal<a class="headerlink" href="#servicio-principal" title="Permalink to this headline">¶</a></h2>
+<p>El primer microservicio actúa de entrada al sistema para los clientes. A
+través de su interfaz podrá obtener referencias a otros servicios.</p>
+<p>Para arrancar este servicio debe proporcionarse un token de
+administración, que deberá ser almacenado en memoria para poder
+comprobarlo en aquellas operaciones que requieren de dicho token.</p>
+<p>Este servicio debe implementar la interfaz <code class="docutils literal notranslate"><span class="pre">Main</span></code> del fichero Slice, la
+cual tiene estás funciones:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getAuthenticator()</span></code>: que devuelve un proxy a un servicio de
+autenticación.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getCatalog()</span></code>: que devuelve un proxy a un servicio de catalogo.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updateDB()</span></code>: recibe una base de datos actualizada de servicio
+proporcionada por otra instancia de este servicio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isAdmin()</span></code>: devuelve un valor booleano para comprobar si el token
+proporcionado corresponde o no con el administrativo.</p></li>
+</ul>
+</div>
+<div class="section" id="servicio-de-autenticacion">
+<h2>Servicio de autenticación.<a class="headerlink" href="#servicio-de-autenticacion" title="Permalink to this headline">¶</a></h2>
+<p>La autenticación en el servicio se gestiona a través de este servicio. El
+usuario debe enviar un usuario y contraseña periódicamente, obteniendo un
+token de autenticación que tendrá una validez limitada en el tiempo
+(2 minutos). También proporciona la funcionalidad de comprobar si un token
+es válido para el resto de servicios del sistema que necesiten verificar
+la validez de un token proporcionado por un usuario.</p>
+<p>El servicio debe almacenar en una base de datos persistente (no
+necesariamente debe ser SQL) las credenciales de los usuarios. Los tokens,
+por su naturaleza temporal, no deben aparecer en ese almacenamiento
+persistente.</p>
+<p>Adicionalmente proporciona al administrador la funcionalidad de añadir y
+eliminar usuarios.</p>
+<p>Dicho servicio implementa la interfaz <code class="docutils literal notranslate"><span class="pre">Authenticator</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">refreshAuthorization()</span></code>: crea un nuevo token de autorización de usuario
+si las credenciales son válidas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isAuthorized()</span></code>: indica si un token dado es válido o no.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">whois()</span></code>: permite descubrir el nombre del usuario a partir de un token
+válido.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addUser()</span></code>: función administrativa que permite añadir unas nuevas
+credenciales en el almacén de datos si el token administrativo es
+correcto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removeUser()</span></code>: función administrativa que permite eliminar unas
+credenciales del almacén de datos si el token administrativo es
+correcto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updateDB()</span></code>: recibe una base de datos actualizada de servicio
+proporcionada por otra instancia de este servicio.</p></li>
+</ul>
+<div class="section" id="comunicacion-entre-instancia-del-servicio-de-autenticacion">
+<h3>Comunicación entre instancia del servicio de autenticación<a class="headerlink" href="#comunicacion-entre-instancia-del-servicio-de-autenticacion" title="Permalink to this headline">¶</a></h3>
+<p>Cada instancia del servicio de autenticación puede generar diferentes
+eventos para comunicar al resto de instancias del servicio. Es importante
+tanto que estos eventos se generen correctamente como que sean tratados al
+recibirlos.</p>
+<p>Dichos eventos pueden venir de dos canales de eventos diferentes,
+representados por las interfaces <code class="docutils literal notranslate"><span class="pre">UserUpdates</span></code> y <code class="docutils literal notranslate"><span class="pre">Revocations</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UserUpdates.newUser)=</span></code>: se emitirá cuando un nuevo usuario sea creado
+por el administrador.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UserUpdates.newToken()</span></code>: se emitirá cuando un usuario llame
+satisfactoriamente a la función refreshAuthorization y un nuevo token
+sea generado.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Revocations.revokeUser()</span></code>: se emitirá cuando el administrador elimine
+un unusuario del sistema.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Revocations.revokeToken()</span></code>: se emitirá cuando un token expire pasados
+los 2 minutos de validez.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="servicio-de-catalogo">
+<h2>Servicio de catálogo<a class="headerlink" href="#servicio-de-catalogo" title="Permalink to this headline">¶</a></h2>
+<p>El servicio de catálogo proporciona a los usuarios acceso al catálogo y a
+la reproducción de los medios disponibles en la aplicación.</p>
+<p>Para ello, debe disponer de un almacén de datos persistente de acceso
+único para la instancia del servicio en ejecución, dónde se almacenará
+información relativa a los medios: identificador, nombre asignado al medio
+por el administrador, y los tags asignados por cada usuario del sistema,
+si las hubiera.</p>
+<p>El servicio debe recibir información desde los proveedores de streaming
+(explicados más adelante) para poder ofrecer a la aplicación de usuario un
+proxy para poder acceder a cada medio.</p>
+<p>El servicio debe implementar la interfaz <code class="docutils literal notranslate"><span class="pre">MediaCatalog</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getTile()</span></code>: permite realizar la búsqueda de un medio conocido su
+identificador.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getTilesByName()</span></code>: permite realizar una búsqueda de medios usando su
+nombre.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getTilesByTags()</span></code>: permite realizar búsquedas de medios en función de
+los tags definidos por el usuario.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addTags()</span></code>: permite añadir una lista de tags a un medio concreto.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removeTags()</span></code>: permite eliminar una lista de tags de un medio concreto.
+Los tags que no existan se ignorarán.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">renameTile()</span></code>: operación de administración que permite renombrar un
+determinado medio en la base de datos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updateDB()</span></code>: recibe una estructura de datos con toda la base de datos
+existente en una instancia que estuviera funcionando anteriormente.</p></li>
+</ul>
+<div class="section" id="comunicacion-entre-instancia-del-servicio-de-catalogo">
+<h3>Comunicación entre instancia del servicio de catálogo<a class="headerlink" href="#comunicacion-entre-instancia-del-servicio-de-catalogo" title="Permalink to this headline">¶</a></h3>
+<p>Las instancias del servicio de catálogo deben enviar actualizaciones entre
+ellas para mantener la coherencia de los datos almacenados. Dicha
+comunicación se realizará a través del canal de eventos representado por
+la interfaz <code class="docutils literal notranslate"><span class="pre">CatalogUpdates</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">renameTile()</span></code>: se emitirá cuando el administrador modifique el nombre
+de un medio en una instancia.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addTags()</span></code>: se emitirá cuando un usuario añada satisfactoriamente tags
+a algún medio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removeTags()</span></code>: se emitirá cuando un usuario elimine satisfactoriamente
+tags de algún medio.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="servicio-de-streaming">
+<h2>Servicio de <em>streaming</em><a class="headerlink" href="#servicio-de-streaming" title="Permalink to this headline">¶</a></h2>
+<p>El servicio de <em>streaming</em> se encarga de enviar al usuario lo necesario
+para que pueda acceder a un medio. El servicio debe leer de un directorio
+en el disco duro los ficheros que serán compartidos por <em>streaming</em>.</p>
+<p>La transmisión de vídeo está fuera del ámbito de la práctica, por lo que
+se proporciona el código necesario para implementar tanto el servidor como
+el cliente del flujo de vídeo.</p>
+<p>El servicio deberá anunciar al servicio de catálogo (a todas sus
+instancias) cada archivo alojado en esa instancia del servicio de
+<em>streaming</em>. Para ello se utilizará un canal de eventos asociado a la
+interfaz <code class="docutils literal notranslate"><span class="pre">StreamAnnouncements</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">newMedia()</span></code>: será emitido por cada instancia cuando se encuentre un
+nuevo fichero o sea subido uno nuevo por el administrador.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">removedMedia()</span></code>: se emitirá cuando un fichero sea eliminado de una
+instancia por el administrador.</p></li>
+</ul>
+<p>El identificador de un medio, utilizado tanto por el servicio de
+<em>streaming</em> como por el catálogo, se calculará en función del contenido
+del fichero, de modo que si 2 instancias almacenan sendas copias del mismo
+fichero, el identificador calculado será igual en ambas. Para ello, puede
+utilizarse la suma SHA256 del fichero.</p>
+<p>El servicio implementa la interfaz <code class="docutils literal notranslate"><span class="pre">StreamProvider</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getStream()</span></code>: genera en la instancia un sirviente de la interfaz
+<code class="docutils literal notranslate"><span class="pre">StreamProvider</span></code> que podrá ser utilizado para acceder al medio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isAvailable()</span></code>: comprueba si la instancia tiene el medio requerido
+disponible.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reannounceMedia()</span></code>: hace que la instancia vuelva a anunciar, a través
+del canal de eventos explicado anteriormente, sus medios disponibles.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uploadMedia()</span></code>: permite al administrador subir un nuevo medio al
+servicio.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deleteMedia()</span></code>: permite al administrador eliminar un medio del
+servicio.</p></li>
+</ul>
+<p>Cuando un usuario solicita reproducir un vídeo a través de la operación
+<code class="docutils literal notranslate"><span class="pre">getStream</span></code>, el servicio generará un sirviente de la interfaz
+<code class="docutils literal notranslate"><span class="pre">StreamController</span></code> único para ese medio y usuario. Dicho sirviente deberá
+ser eliminado del adaptador de objetos y olvidado por completo una vez el
+usuario termine de utilizarlo.</p>
+<p>Las operaciones disponibles en la interfaz son:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getSDP()</span></code>: devuelve la cadena de conexión para reproducir el streaming
+del fichero.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getSyncTopic()</span></code>: devuelve el nombre de un canal de eventos generado a
+propósito para que el cliente pueda recibir eventos relacionados con
+la reproducción. Dicha comunicación se explicará más adelante.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refreshAuthentiation()</span></code>: dado que los tokens de autenticación expiran
+cada 2 minutos, permiten al usuario enviar su token renovado para
+evitar ser expulsado de la reproducción. Si el usuario no cumpliera
+con la actualización de su token, el servicio de envío del medio
+debería detenerse y dar por finalizado el streaming.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop()</span></code>: permite al usuario detener la reproducción y liberar los
+recursos.</p></li>
+</ul>
+<div class="section" id="comunicacion-entre-el-servicio-de-streaming-y-el-cliente">
+<h3>Comunicación entre el servicio de <em>streaming</em> y el cliente.<a class="headerlink" href="#comunicacion-entre-el-servicio-de-streaming-y-el-cliente" title="Permalink to this headline">¶</a></h3>
+<p>El servicio de <em>streaming</em> necesita comunicarse con el cliente para
+solicitarle la actualización de su token de autenticación cuando sea
+necesario. Para ello, cada sirviente de <code class="docutils literal notranslate"><span class="pre">StreamController</span></code> creará y
+destruirá, cuando sea necesario, un canal de eventos único donde podrá
+enviar éste evento a los suscriptores, cumpliendo con la interfaz
+<code class="docutils literal notranslate"><span class="pre">StreamSync</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">requestAuthentication()</span></code>: se emitirá cuando se reciba un evento de
+token inválido desde el servicio de autenticación. Se esperarán 5
+segundos para que el cliente pueda eviar su nuevo token. Si no lo
+hace, se interrumpirá el envío del medio.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="intro_extraordinaria.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><strong>IceFlix</strong>: diseño de microservicios - Entrega extraordinaria</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="canales_eventos.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Uso de canales de eventos</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Tobías Díaz, José Luis Segura<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
