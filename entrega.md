@@ -51,8 +51,8 @@ anteriores, además de algunos ficheros de configuración, ejemplos de
 implementación y utilidades para crear un programa instalable Python.
 
 Adicionalmente a la evaluación automática también, realizará un análisis
-estático de código con `pylint`[3]. Se considera que el estilo es correcto
-si obtiene como mínimo un **9.0** de puntuación global.
+estático de código con [`pylint`][3]. Se considera que el estilo es
+correcto si obtiene como mínimo un **9.0** de puntuación global.
 
 ```{note}
 ATENCIÓN: Si tenéis miembros en el equipo que utilicen Windows, tened en
