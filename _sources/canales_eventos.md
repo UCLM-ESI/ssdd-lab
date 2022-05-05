@@ -42,9 +42,15 @@ de datos (persistente o no).
 1. El servicio comenzará a anunciarse normalmente a través de eventos
     "announce".
 
- ```
- diagramas de secuencia
- ```
+```{figure} assets/service_start_no_other_services.png
+Diagrama de secuencia de anunciamiento inicial cuando no hay otros
+servicios activos
+```
+
+```{figure} assets/service_start_current_exists.png
+Diagrama de secuencia de anunciamiento inicial cuando hay otros servicios
+activos previamente
+```
 
 Para facilitar la implementación, se proporciona un código de ejemplo en
 el [repositorio plantilla][1] que puede ser usado libremente. Dicha

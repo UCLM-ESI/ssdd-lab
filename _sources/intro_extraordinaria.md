@@ -22,8 +22,8 @@ todos los detalles de su funcionamiento han sido publicados por la empresa,
 sin embargo, si los suficientes para poder hacernos una idea general de su
 funcionamiento.
 
-```
-Imagen Netflix arquitectura
+```{figure} assets/netflix_in_aws_arch.png
+Arquitectura de servicios de Netflix
 ```
 
 Una colección de microservicios soporta el funcionamiento de la
